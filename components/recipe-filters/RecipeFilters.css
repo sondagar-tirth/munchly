@@ -1,0 +1,180 @@
+.recipe-filters-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* FILTER SCROLL AREA */
+
+.recipe-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding: 5px 45px;
+
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.recipe-filters::-webkit-scrollbar {
+    display: none;
+}
+
+/* FILTER BUTTONS */
+
+.recipe-filters button {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 10px 17px;
+
+    border: 1px solid #e5ddd5;
+    border-radius: 30px;
+
+    background: #ffffff;
+
+    color: #666;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.recipe-filters button:hover:not(.active) {
+    border-color: #e85d04;
+    color: #e85d04;
+
+    transform: translateY(-1px);
+}
+
+.recipe-filters button.active {
+    border-color: #e85d04;
+
+    background: #e85d04;
+
+    color: #ffffff;
+
+    cursor: default;
+}
+
+/* VEG */
+
+.recipe-filters .veg-filter span {
+    color: #2e9d45;
+
+    font-size: 10px;
+}
+
+.recipe-filters .veg-filter.active {
+    border-color: #2e9d45;
+
+    background: #2e9d45;
+
+    color: #ffffff;
+}
+
+.recipe-filters .veg-filter.active span {
+    color: #ffffff;
+}
+
+/* ARROWS */
+
+.filter-arrow {
+    position: absolute;
+
+    z-index: 5;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e5ddd5;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #444;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.filter-arrow:hover {
+    border-color: #e85d04;
+
+    background: #e85d04;
+
+    color: #ffffff;
+
+    transform: scale(1.05);
+}
+
+.filter-arrow-left {
+    left: 0;
+}
+
+.filter-arrow-right {
+    right: 0;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .recipe-filters-wrapper {
+        margin-top: 24px;
+    }
+
+    .recipe-filters {
+        gap: 8px;
+
+        padding: 5px 40px;
+    }
+
+    .recipe-filters button {
+        padding: 9px 15px;
+
+        font-size: 12px;
+    }
+
+    .filter-arrow {
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+    }
+}

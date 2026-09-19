@@ -1,0 +1,517 @@
+.munchly-loader {
+    min-height: calc(100vh - 76px);
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #fffaf5;
+}
+
+/* =========================
+   BACKGROUND GLOW
+========================= */
+
+.loader-glow {
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    background: rgba(232, 93, 4, 0.10);
+
+    filter: blur(90px);
+
+    animation: glow 5s ease-in-out infinite alternate;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.food-loader {
+    position: relative;
+
+    width: 420px;
+    height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   FOOD AREA
+========================= */
+
+.food-area {
+    position: relative;
+
+    width: 300px;
+    height: 260px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    animation: foodFloat 3s ease-in-out infinite;
+}
+
+/* =========================
+   PLATE
+========================= */
+
+.plate {
+    position: absolute;
+
+    bottom: 20px;
+
+    width: 270px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #ffffff 0%,
+            #f7f4ef 55%,
+            #ddd8d0 100%
+        );
+
+    box-shadow:
+        0 20px 35px rgba(0, 0, 0, 0.12),
+        inset 0 -8px 12px rgba(0, 0, 0, 0.06);
+}
+
+.plate-inner {
+    position: absolute;
+
+    width: 205px;
+    height: 48px;
+
+    left: 50%;
+    top: 8px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    box-shadow:
+        inset 0 4px 10px rgba(0, 0, 0, 0.07);
+}
+
+/* =========================
+   FOOD
+========================= */
+
+.food {
+    position: absolute;
+
+    z-index: 3;
+
+    bottom: 55px;
+
+    width: 190px;
+    height: 110px;
+
+    border-radius: 50%;
+
+    background:
+        repeating-radial-gradient(
+            ellipse at center,
+            #e85d04 0px,
+            #e85d04 5px,
+            #ff8a3d 6px,
+            #f06a16 10px
+        );
+
+    transform: rotate(-4deg);
+
+    box-shadow:
+        0 12px 18px rgba(232, 93, 4, 0.22);
+
+    animation: foodTilt 2.5s ease-in-out infinite;
+}
+
+/* food pieces */
+
+.food-piece {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #e63924;
+
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.piece-one {
+    left: 25px;
+    top: 30px;
+}
+
+.piece-two {
+    right: 30px;
+    top: 25px;
+}
+
+.piece-three {
+    left: 70px;
+    top: 12px;
+
+    width: 12px;
+    height: 12px;
+
+    background: #7caa32;
+}
+
+.piece-four {
+    right: 65px;
+    bottom: 22px;
+
+    width: 13px;
+    height: 13px;
+
+    background: #75a52d;
+}
+
+.piece-five {
+    left: 110px;
+    top: 50px;
+
+    width: 10px;
+    height: 10px;
+
+    background: #f4c542;
+}
+
+/* =========================
+   STEAM
+========================= */
+
+.steam {
+    position: absolute;
+
+    z-index: 5;
+
+    bottom: 145px;
+
+    width: 4px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    filter: blur(2px);
+
+    animation: steam 2.5s ease-in-out infinite;
+}
+
+.steam-one {
+    left: 105px;
+}
+
+.steam-two {
+    left: 145px;
+    height: 70px;
+    animation-delay: 0.6s;
+}
+
+.steam-three {
+    left: 180px;
+    height: 50px;
+    animation-delay: 1.1s;
+}
+
+/* =========================
+   FLOATING INGREDIENTS
+========================= */
+
+.ingredient {
+    position: absolute;
+
+    z-index: 10;
+}
+
+/* tomatoes */
+
+.tomato {
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: #e63924;
+
+    box-shadow:
+        inset -4px -5px 7px rgba(0, 0, 0, 0.16),
+        0 7px 15px rgba(0, 0, 0, 0.1);
+
+    animation: ingredientFloat 3s ease-in-out infinite;
+}
+
+.tomato-one {
+    top: 105px;
+    left: 55px;
+}
+
+.tomato-two {
+    top: 65px;
+    right: 70px;
+
+    width: 15px;
+    height: 15px;
+
+    animation-delay: 0.8s;
+}
+
+/* leaves */
+
+.leaf {
+    width: 30px;
+    height: 15px;
+
+    border-radius: 100% 0 100% 0;
+
+    background: #6e9f35;
+
+    transform: rotate(35deg);
+
+    animation: leafFloat 3.5s ease-in-out infinite;
+}
+
+.leaf-one {
+    top: 70px;
+    left: 115px;
+}
+
+.leaf-two {
+    top: 125px;
+    right: 35px;
+
+    transform: rotate(-35deg);
+
+    animation-delay: 1s;
+}
+
+.leaf-three {
+    top: 45px;
+    left: 190px;
+
+    width: 20px;
+    height: 10px;
+
+    animation-delay: 1.5s;
+}
+
+/* tiny dots */
+
+.dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #e85d04;
+
+    animation: dotFloat 2.5s ease-in-out infinite;
+}
+
+.dot-one {
+    top: 100px;
+    right: 125px;
+}
+
+.dot-two {
+    top: 155px;
+    left: 75px;
+
+    animation-delay: 0.5s;
+}
+
+.dot-three {
+    top: 40px;
+    right: 135px;
+
+    animation-delay: 1s;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.loader-progress {
+    position: absolute;
+
+    bottom: 5px;
+
+    width: 310px;
+
+    text-align: center;
+}
+
+.progress-number {
+    margin-bottom: 12px;
+
+    color: #202020;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.progress-track {
+    width: 100%;
+    height: 3px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #eadfd5;
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: 10px;
+
+    background: #e85d04;
+
+    transition: width 0.08s linear;
+}
+
+.progress-text {
+    margin-top: 13px;
+
+    color: #999;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes foodFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes foodTilt {
+
+    0%,
+    100% {
+        transform: rotate(-4deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+@keyframes steam {
+
+    0% {
+        opacity: 0;
+        transform: translateY(15px) scaleX(0.7);
+    }
+
+    40% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-45px) scaleX(1.4);
+    }
+}
+
+@keyframes ingredientFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-22px) rotate(20deg);
+    }
+}
+
+@keyframes leafFloat {
+
+    0%,
+    100% {
+        translate: 0 0;
+        rotate: 0deg;
+    }
+
+    50% {
+        translate: 0 -18px;
+        rotate: 20deg;
+    }
+}
+
+@keyframes dotFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-25px);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+
+    0% {
+        transform: translate(-80px, -20px);
+    }
+
+    100% {
+        transform: translate(80px, 30px);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .munchly-loader {
+        min-height: calc(100vh - 68px);
+    }
+
+    .food-loader {
+        transform: scale(0.78);
+    }
+}

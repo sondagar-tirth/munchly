@@ -1,0 +1,140 @@
+.munchly-picks {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 24px;
+}
+
+.munchly-picks-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.munchly-picks-header span {
+    color: #e85d04;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.munchly-picks-header h2 {
+    margin: 10px 0 0;
+    color: #202020;
+    font-size: 40px;
+    letter-spacing: -1.5px;
+}
+
+.munchly-picks-header h2 strong {
+    color: #e85d04;
+}
+
+.munchly-picks-header a {
+    color: #e85d04;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.munchly-picks-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.munchly-pick-card {
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    text-decoration: none;
+    color: inherit;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.munchly-pick-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.11);
+}
+
+.munchly-pick-image {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.munchly-pick-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.45s ease;
+}
+
+.munchly-pick-card:hover img {
+    transform: scale(1.06);
+}
+
+.munchly-pick-content {
+    padding: 18px 18px 20px;
+}
+
+.munchly-pick-content span {
+    color: #e85d04;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.munchly-pick-content h3 {
+    margin: 7px 0 0;
+
+    color: #222;
+
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+@media (max-width: 1000px) {
+    .munchly-picks-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .munchly-picks {
+        padding: 65px 20px;
+    }
+
+    .munchly-picks-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .munchly-picks-header h2 {
+        font-size: 34px;
+    }
+
+    .munchly-picks-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .munchly-picks-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,622 @@
+.search-page {
+    min-height: 100vh;
+    background: #fffaf5;
+}
+
+/* =========================================
+   SEARCH DISCOVERY
+========================================= */
+
+.search-discovery {
+    position: relative;
+
+    min-height: calc(100vh - 76px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    padding: 100px 24px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(232, 93, 4, 0.08),
+            transparent 34%
+        ),
+        #fffaf5;
+}
+
+/* BACKGROUND GLOW */
+
+.search-glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: rgba(232, 93, 4, 0.06);
+
+    filter: blur(70px);
+
+    animation: glowPulse 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+@keyframes glowPulse {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   CENTER CONTENT
+========================================= */
+
+.search-center {
+    position: relative;
+    z-index: 10;
+
+    width: 100%;
+    max-width: 680px;
+
+    text-align: center;
+}
+
+.search-center-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(232, 93, 4, 0.2);
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    color: #e85d04;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+    backdrop-filter: blur(10px);
+
+    animation: fadeDown 0.8s ease both;
+}
+
+.search-center h1 {
+    margin: 20px 0 16px;
+
+    color: #202020;
+
+    font-size: clamp(48px, 6vw, 76px);
+
+    line-height: 0.98;
+
+    letter-spacing: -4px;
+
+    animation: fadeUp 0.8s 0.1s ease both;
+}
+
+.search-center h1 strong {
+    color: #e85d04;
+}
+
+.search-center p {
+    max-width: 500px;
+
+    margin: 0 auto 32px;
+
+    color: #777;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    animation: fadeUp 0.8s 0.2s ease both;
+}
+
+/* SEARCH BAR */
+
+.search-center .search-bar {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    animation: searchAppear 0.8s 0.3s ease both;
+}
+
+@keyframes searchAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* SUGGESTIONS */
+
+.search-suggestions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 18px;
+
+    animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.search-suggestions span {
+    color: #999;
+
+    font-size: 11px;
+}
+
+.search-suggestions span:not(:first-child) {
+    padding: 6px 11px;
+
+    border: 1px solid #e8dfd7;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    color: #777;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.search-suggestions span:not(:first-child):hover {
+    border-color: #e85d04;
+
+    color: #e85d04;
+
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   FLOATING FOOD
+========================================= */
+
+.search-food-orbit {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+.floating-food {
+    position: absolute;
+
+    width: 135px;
+    height: 135px;
+
+    padding: 7px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.03);
+
+    animation: floatingFood 5s ease-in-out infinite;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.floating-food img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.floating-food span {
+    position: absolute;
+
+    left: 50%;
+    bottom: -28px;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+
+    color: #777;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    opacity: 0.8;
+}
+
+/* POSITIONS */
+
+.food-1 {
+    top: 14%;
+    left: 13%;
+
+    animation-delay: 0s;
+}
+
+.food-2 {
+    top: 12%;
+    right: 15%;
+
+    animation-delay: -1s;
+}
+
+.food-3 {
+    top: 43%;
+    left: 5%;
+
+    animation-delay: -2s;
+}
+
+.food-4 {
+    top: 45%;
+    right: 6%;
+
+    animation-delay: -3s;
+}
+
+.food-5 {
+    bottom: 13%;
+    left: 16%;
+
+    animation-delay: -1.5s;
+}
+
+.food-6 {
+    bottom: 11%;
+    right: 17%;
+
+    animation-delay: -3.5s;
+}
+
+.food-7 {
+    top: 27%;
+    left: 23%;
+
+    width: 92px;
+    height: 92px;
+
+    animation-delay: -2.5s;
+}
+
+.food-8 {
+    top: 28%;
+    right: 24%;
+
+    width: 92px;
+    height: 92px;
+
+    animation-delay: -4s;
+}
+
+@keyframes floatingFood {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(3deg);
+    }
+}
+
+/* =========================================
+   SCROLL HINT
+========================================= */
+
+.search-scroll-hint {
+    position: absolute;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #aaa;
+
+    font-size: 10px;
+
+    letter-spacing: 0.5px;
+}
+
+.search-scroll-hint span {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #e85d04;
+
+    animation: hintPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* =========================================
+   GENERAL ANIMATIONS
+========================================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   SEARCH RESULTS
+========================================= */
+
+.search-results-page {
+    background: #fffaf5;
+}
+
+.search-results-top {
+    padding: 75px 24px 35px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(232, 93, 4, 0.08),
+            transparent 25%
+        );
+}
+
+.search-results-inner {
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+.search-results-bar {
+    max-width: 600px;
+
+    margin-top: 28px;
+}
+
+.search-no-results {
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 24px;
+
+    text-align: center;
+}
+
+.no-results-icon {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 50%;
+
+    background: #fff0e6;
+
+    font-size: 34px;
+
+    animation: floatingFood 3s ease-in-out infinite;
+}
+
+.search-no-results h2 {
+    margin: 0 0 10px;
+
+    color: #202020;
+
+    font-size: 28px;
+}
+
+.search-no-results p {
+    margin: 0 0 25px;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+.search-no-results .search-bar {
+    width: 100%;
+    max-width: 550px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+    .floating-food {
+        width: 110px;
+        height: 110px;
+    }
+
+    .food-7,
+    .food-8 {
+        display: none;
+    }
+
+    .food-1 {
+        left: 6%;
+    }
+
+    .food-2 {
+        right: 7%;
+    }
+
+    .food-5 {
+        left: 8%;
+    }
+
+    .food-6 {
+        right: 9%;
+    }
+}
+
+@media (max-width: 700px) {
+    .search-discovery {
+        min-height: calc(100vh - 68px);
+
+        padding: 80px 20px;
+    }
+
+    .search-center h1 {
+        font-size: 50px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .search-center p {
+        font-size: 14px;
+    }
+
+    .floating-food {
+        width: 78px;
+        height: 78px;
+    }
+
+    .floating-food span {
+        display: none;
+    }
+
+    .food-1 {
+        top: 9%;
+        left: 5%;
+    }
+
+    .food-2 {
+        top: 10%;
+        right: 5%;
+    }
+
+    .food-3 {
+        top: auto;
+        bottom: 17%;
+        left: 3%;
+    }
+
+    .food-4 {
+        top: auto;
+        bottom: 17%;
+        right: 3%;
+    }
+
+    .food-5,
+    .food-6 {
+        display: none;
+    }
+
+    .search-suggestions {
+        flex-wrap: wrap;
+    }
+
+    .search-scroll-hint {
+        display: none;
+    }
+
+    .search-results-top {
+        padding: 55px 20px 25px;
+    }
+}
+
+@media (max-width: 450px) {
+    .search-center h1 {
+        font-size: 40px;
+    }
+
+    .search-center-badge {
+        font-size: 8px;
+    }
+
+    .floating-food {
+        width: 65px;
+        height: 65px;
+    }
+
+    .food-3,
+    .food-4 {
+        display: none;
+    }
+}

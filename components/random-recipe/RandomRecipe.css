@@ -1,0 +1,118 @@
+.random-recipe {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 24px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+
+    align-items: center;
+}
+
+.random-recipe-image {
+    width: 100%;
+    aspect-ratio: 1 / 0.85;
+
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.random-recipe-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+.random-recipe-image:hover img {
+    transform: scale(1.04);
+}
+
+.random-recipe-content > span {
+    color: #e85d04;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.random-recipe-content h2 {
+    max-width: 500px;
+
+    margin: 14px 0 18px;
+
+    color: #202020;
+
+    font-size: 48px;
+    line-height: 1.08;
+    letter-spacing: -2px;
+}
+
+.random-recipe-content h2 strong {
+    color: #e85d04;
+}
+
+.random-recipe-content p {
+    max-width: 470px;
+
+    margin: 0 0 30px;
+
+    color: #777;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.random-recipe-button {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 13px 21px;
+
+    border-radius: 12px;
+
+    background: #e85d04;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.random-recipe-button:hover {
+    background: #d95200;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 800px) {
+    .random-recipe {
+        grid-template-columns: 1fr;
+        gap: 35px;
+
+        padding: 65px 20px;
+    }
+
+    .random-recipe-content h2 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .random-recipe-content h2 {
+        font-size: 34px;
+    }
+
+    .random-recipe-content p {
+        font-size: 14px;
+    }
+}

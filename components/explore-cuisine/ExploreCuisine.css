@@ -1,0 +1,168 @@
+.explore-cuisine {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 24px;
+}
+
+.explore-cuisine-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.explore-cuisine-header > div > span {
+    color: #e85d04;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.explore-cuisine-header h2 {
+    max-width: 650px;
+    margin: 10px 0 0;
+
+    color: #202020;
+
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+}
+
+.explore-cuisine-header h2 strong {
+    color: #e85d04;
+}
+
+.explore-cuisine-header > a {
+    color: #e85d04;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cuisine-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.cuisine-card {
+    position: relative;
+
+    min-height: 260px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #222;
+
+    text-decoration: none;
+}
+
+.cuisine-card img {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+.cuisine-card::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.78),
+            rgba(0, 0, 0, 0.05)
+        );
+}
+
+.cuisine-card:hover img {
+    transform: scale(1.07);
+}
+
+.cuisine-overlay {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 25px;
+}
+
+.cuisine-overlay span {
+    color: rgba(255, 255, 255, 0.75);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.cuisine-overlay h3 {
+    margin: 7px 0 6px;
+
+    color: #ffffff;
+
+    font-size: 26px;
+    letter-spacing: -0.5px;
+}
+
+.cuisine-overlay p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .cuisine-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .explore-cuisine {
+        padding: 65px 20px;
+    }
+
+    .explore-cuisine-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .explore-cuisine-header h2 {
+        font-size: 34px;
+    }
+
+    .cuisine-card {
+        min-height: 220px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cuisine-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cuisine-card {
+        min-height: 240px;
+    }
+}
