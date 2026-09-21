@@ -12,13 +12,16 @@ import Pagination from "@/components/pagination/Pagination";
 import "./Recipes.css";
 
 export default async function RecipesPage({ searchParams }) {
+
     const params = await searchParams;
 
     const selectedCategory = params?.category || "";
+
     const currentPage = Math.max(
         Number(params?.page) || 1,
         1
     );
+
 
     const categoryData = await getCategories();
 
@@ -27,51 +30,121 @@ export default async function RecipesPage({ searchParams }) {
             (category) => category.strCategory
         ) || [];
 
+
     let meals;
     let itemsPerPage;
 
-    if (selectedCategory) {
-        const data = await getMealsByCategory(selectedCategory);
 
-        meals = (data.meals || []).map((meal) => ({
-            ...meal,
-            strCategory: selectedCategory,
-        }));
+    if (selectedCategory) {
+
+        const data =
+            await getMealsByCategory(
+                selectedCategory
+            );
+
+        meals =
+            (data.meals || []).map(
+                (meal) => ({
+                    ...meal,
+                    strCategory:
+                        selectedCategory,
+                })
+            );
 
         // 6 rows × 4 cards
         itemsPerPage = 24;
+
     } else {
-        meals = await getDiscoverRecipes();
+
+        meals =
+            await getDiscoverRecipes();
 
         // 3 rows × 4 cards
         itemsPerPage = 12;
     }
 
-    const totalPages = Math.ceil(
-        meals.length / itemsPerPage
-    );
 
-    const validPage = Math.min(
-        currentPage,
-        Math.max(totalPages, 1)
-    );
+    const totalPages =
+        Math.ceil(
+            meals.length / itemsPerPage
+        );
+
+
+    const validPage =
+        Math.min(
+            currentPage,
+            Math.max(totalPages, 1)
+        );
+
 
     const startIndex =
-        (validPage - 1) * itemsPerPage;
+        (validPage - 1) *
+        itemsPerPage;
 
-    const visibleMeals = meals.slice(
-        startIndex,
-        startIndex + itemsPerPage
-    );
+
+    const visibleMeals =
+        meals.slice(
+            startIndex,
+            startIndex + itemsPerPage
+        );
+
 
     return (
         <main className="recipes-page">
- 
+
+            {/* =========================================
+                FLOATING BACKGROUND DECORATION
+            ========================================= */}
+
+            <div
+                className="recipes-decoration"
+                aria-hidden="true"
+            >
+
+                <span className="recipes-spark spark-1">
+                    ✦
+                </span>
+
+                <span className="recipes-spark spark-2">
+                    ✧
+                </span>
+
+                <span className="recipes-heart heart-1">
+                    ♡
+                </span>
+
+                <span className="recipes-heart heart-2">
+                    ♡
+                </span>
+
+                <span className="recipes-leaf leaf-1">
+                    ❧
+                </span>
+
+                <span className="recipes-leaf leaf-2">
+                    ❧
+                </span>
+
+                <span className="recipes-dot dot-1"></span>
+                <span className="recipes-dot dot-2"></span>
+                <span className="recipes-dot dot-3"></span>
+
+                <div className="recipes-orbit"></div>
+
+            </div>
+
+
+            {/* =========================================
+                HERO
+            ========================================= */}
+
             <section className="recipes-hero">
 
                 <div className="recipes-hero-content">
 
-                    <span className="wow animate__animated animate__fadeInUp">
+                    <span
+                        className="wow animate__animated animate__fadeInUp"
+                    >
                         EXPLORE MUNCHLY
                     </span>
 
@@ -80,15 +153,17 @@ export default async function RecipesPage({ searchParams }) {
                         data-wow-delay="0.15s"
                     >
                         Find something
-                        <strong> delicious.</strong>
+                        <strong>
+                            delicious.
+                        </strong>
                     </h1>
 
                     <p
                         className="wow animate__animated animate__fadeInUp"
                         data-wow-delay="0.3s"
                     >
-                        Discover recipes from different flavours,
-                        cuisines and categories.
+                        Discover recipes from different
+                        flavours, cuisines and categories.
                     </p>
 
                     <div
@@ -100,7 +175,33 @@ export default async function RecipesPage({ searchParams }) {
 
                 </div>
 
+
+                {/* SMALL HERO DECORATIONS */}
+
+                <div
+                    className="recipes-hero-doodle doodle-left"
+                    aria-hidden="true"
+                >
+                    <span>✦</span>
+                    <span>·</span>
+                    <span>♡</span>
+                </div>
+
+                <div
+                    className="recipes-hero-doodle doodle-right"
+                    aria-hidden="true"
+                >
+                    <span>✧</span>
+                    <span>·</span>
+                    <span>✦</span>
+                </div>
+
             </section>
+
+
+            {/* =========================================
+                RECIPES
+            ========================================= */}
 
             <section
                 className="recipes-section"
@@ -111,7 +212,9 @@ export default async function RecipesPage({ searchParams }) {
 
                     <div>
 
-                        <span className="wow animate__animated animate__fadeInUp">
+                        <span
+                            className="wow animate__animated animate__fadeInUp"
+                        >
                             {selectedCategory
                                 ? "CATEGORY RECIPES"
                                 : "CURATED FOR YOU"}
@@ -136,6 +239,7 @@ export default async function RecipesPage({ searchParams }) {
 
                 </div>
 
+
                 <div
                     className="wow animate__animated animate__fadeInUp"
                     data-wow-delay="0.25s"
@@ -146,8 +250,10 @@ export default async function RecipesPage({ searchParams }) {
                     />
                 </div>
 
+
                 {visibleMeals.length > 0 ? (
                     <>
+
                         <div
                             className="wow animate__animated animate__fadeInUp"
                             data-wow-delay="0.3s"
@@ -156,6 +262,7 @@ export default async function RecipesPage({ searchParams }) {
                                 meals={visibleMeals}
                             />
                         </div>
+
 
                         <div
                             className="wow animate__animated animate__fadeInUp"
@@ -166,9 +273,16 @@ export default async function RecipesPage({ searchParams }) {
                                 totalPages={totalPages}
                             />
                         </div>
+
                     </>
                 ) : (
+
                     <div className="recipes-empty wow animate__animated animate__fadeInUp">
+
+                        <div className="recipes-empty-icon">
+                            ♡
+                        </div>
+
                         <h3>
                             No recipes found
                         </h3>
@@ -176,7 +290,9 @@ export default async function RecipesPage({ searchParams }) {
                         <p>
                             Try another category.
                         </p>
+
                     </div>
+
                 )}
 
             </section>

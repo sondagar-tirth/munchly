@@ -1,16 +1,29 @@
 import Link from "next/link";
 import { getMealById } from "@/lib/api/meals";
+
 import "./RecipeDetails.css";
 
 export default async function RecipeDetailsPage({ params }) {
+
     const { id } = await params;
 
     const data = await getMealById(id);
+
     const meal = data.meals?.[0];
+
 
     if (!meal) {
         return (
             <main className="recipe-not-found">
+
+                <div
+                    className="recipe-detail-decoration"
+                    aria-hidden="true"
+                >
+                    <span>✦</span>
+                    <span>♡</span>
+                    <span>✧</span>
+                </div>
 
                 <h1 className="wow animate__animated animate__fadeInUp">
                     Recipe not found
@@ -35,24 +48,87 @@ export default async function RecipeDetailsPage({ params }) {
         );
     }
 
+
     const ingredients = [];
 
     for (let i = 1; i <= 20; i++) {
-        const ingredient = meal[`strIngredient${i}`];
-        const measure = meal[`strMeasure${i}`];
+
+        const ingredient =
+            meal[`strIngredient${i}`];
+
+        const measure =
+            meal[`strMeasure${i}`];
+
 
         if (ingredient?.trim()) {
+
             ingredients.push({
-                ingredient: ingredient.trim(),
-                measure: measure?.trim() || "",
+                ingredient:
+                    ingredient.trim(),
+
+                measure:
+                    measure?.trim() || "",
             });
         }
     }
 
+
     return (
         <main className="recipe-details">
 
-            {/* HERO */}
+            {/* =========================================
+                BACKGROUND DECORATION
+            ========================================= */}
+
+            <div
+                className="recipe-detail-decoration"
+                aria-hidden="true"
+            >
+
+                <div className="recipe-bg-glow glow-top"></div>
+
+                <div className="recipe-bg-glow glow-middle"></div>
+
+                <div className="recipe-bg-glow glow-bottom"></div>
+
+
+                <span className="recipe-bg-spark spark-one">
+                    ✦
+                </span>
+
+                <span className="recipe-bg-spark spark-two">
+                    ✧
+                </span>
+
+                <span className="recipe-bg-spark spark-three">
+                    ✦
+                </span>
+
+
+                <span className="recipe-bg-heart heart-one">
+                    ♡
+                </span>
+
+                <span className="recipe-bg-heart heart-two">
+                    ♡
+                </span>
+
+
+                <span className="recipe-bg-dot dot-one"></span>
+
+                <span className="recipe-bg-dot dot-two"></span>
+
+                <span className="recipe-bg-dot dot-three"></span>
+
+
+                <div className="recipe-bg-ring"></div>
+
+            </div>
+
+
+            {/* =========================================
+                HERO
+            ========================================= */}
 
             <section className="recipe-detail-hero">
 
@@ -65,6 +141,7 @@ export default async function RecipeDetailsPage({ params }) {
                         alt={meal.strMeal}
                     />
                 </div>
+
 
                 <div
                     className="recipe-detail-info wow animate__animated animate__fadeInRight"
@@ -82,12 +159,14 @@ export default async function RecipeDetailsPage({ params }) {
 
                     <br />
 
+
                     <span
                         className="recipe-detail-category wow animate__animated animate__fadeInUp"
                         data-wow-delay="0.4s"
                     >
                         {meal.strCategory}
                     </span>
+
 
                     <h1
                         className="wow animate__animated animate__fadeInUp"
@@ -96,12 +175,14 @@ export default async function RecipeDetailsPage({ params }) {
                         {meal.strMeal}
                     </h1>
 
+
                     <p
                         className="recipe-area wow animate__animated animate__fadeInUp"
                         data-wow-delay="0.6s"
                     >
                         {meal.strArea} Cuisine
                     </p>
+
 
                     {meal.strTags && (
                         <div
@@ -123,7 +204,10 @@ export default async function RecipeDetailsPage({ params }) {
 
             </section>
 
-            {/* CONTENT */}
+
+            {/* =========================================
+                CONTENT
+            ========================================= */}
 
             <section className="recipe-detail-content">
 
@@ -146,31 +230,39 @@ export default async function RecipeDetailsPage({ params }) {
 
                     </div>
 
+
                     <div className="ingredients-list">
 
                         {ingredients.map((item, index) => (
+
                             <div
                                 className="ingredient-item wow animate__animated animate__fadeInUp"
                                 data-wow-delay={`${0.05 + (index % 6) * 0.07}s`}
                                 key={index}
                             >
+
                                 <span className="ingredient-number">
                                     {String(index + 1).padStart(2, "0")}
                                 </span>
+
 
                                 <span className="ingredient-name">
                                     {item.ingredient}
                                 </span>
 
+
                                 <span className="ingredient-measure">
                                     {item.measure}
                                 </span>
+
                             </div>
+
                         ))}
 
                     </div>
 
                 </div>
+
 
                 {/* INSTRUCTIONS */}
 
@@ -191,42 +283,66 @@ export default async function RecipeDetailsPage({ params }) {
 
                     </div>
 
+
                     <div className="instructions">
 
                         {(() => {
+
                             let stepNumber = 0;
 
                             return meal.strInstructions
                                 ?.split(/\r?\n/)
-                                .filter((step) => step.trim())
-                                .map((step, index) => {
+                                .filter(
+                                    (step) =>
+                                        step.trim()
+                                )
+                                .map(
+                                    (step, index) => {
 
-                                    const text = step.trim();
+                                        const text =
+                                            step.trim();
 
-                                    if (/^STEP\s+\d+/i.test(text)) {
-                                        return null;
-                                    }
 
-                                    stepNumber++;
+                                        if (
+                                            /^STEP\s+\d+/i.test(
+                                                text
+                                            )
+                                        ) {
+                                            return null;
+                                        }
 
-                                    return (
-                                        <div
-                                            className="instruction-item wow animate__animated animate__fadeInUp"
-                                            data-wow-delay={`${0.05 + (stepNumber - 1) * 0.08}s`}
-                                            key={index}
-                                        >
-                                            <div className="instruction-index">
-                                                {String(stepNumber).padStart(2, "0")}
+
+                                        stepNumber++;
+
+
+                                        return (
+                                            <div
+                                                className="instruction-item wow animate__animated animate__fadeInUp"
+                                                data-wow-delay={`${0.05 + (stepNumber - 1) * 0.08}s`}
+                                                key={index}
+                                            >
+
+                                                <div className="instruction-index">
+                                                    {String(
+                                                        stepNumber
+                                                    ).padStart(
+                                                        2,
+                                                        "0"
+                                                    )}
+                                                </div>
+
+
+                                                <div className="instruction-line"></div>
+
+
+                                                <p>
+                                                    {text}
+                                                </p>
+
                                             </div>
-
-                                            <div className="instruction-line"></div>
-
-                                            <p>
-                                                {text}
-                                            </p>
-                                        </div>
-                                    );
-                                });
+                                        );
+                                    }
+                                );
 
                         })()}
 
@@ -236,9 +352,13 @@ export default async function RecipeDetailsPage({ params }) {
 
             </section>
 
-            {/* YOUTUBE */}
+
+            {/* =========================================
+                YOUTUBE
+            ========================================= */}
 
             {meal.strYoutube && (
+
                 <section className="recipe-video">
 
                     <div className="section-heading">
@@ -256,6 +376,7 @@ export default async function RecipeDetailsPage({ params }) {
 
                     </div>
 
+
                     <a
                         href={meal.strYoutube}
                         target="_blank"
@@ -267,6 +388,7 @@ export default async function RecipeDetailsPage({ params }) {
                     </a>
 
                 </section>
+
             )}
 
         </main>

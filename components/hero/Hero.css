@@ -1,42 +1,121 @@
 .hero {
-    min-height: 520px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 24px;
+    position: relative;
 
-    display: flex;
+    min-height: 600px;
+    max-width: 1260px;
+
+    margin: 0 auto;
+    padding: 75px 55px;
+
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+
     align-items: center;
 
+    gap: 20px;
+
+    overflow: hidden;
+
     background:
+        radial-gradient(
+            circle at 82% 45%,
+            rgba(232, 93, 4, 0.075),
+            transparent 30%
+        ),
         linear-gradient(
-            90deg,
-            rgba(255, 247, 240, 0.98),
-            rgba(255, 247, 240, 0.72)
+            135deg,
+            #fff7f0,
+            #fffaf7
         );
 
-    border-radius: 0 0 32px 32px;
+    border-radius:
+        0 0 36px 36px;
 }
 
+
+/* =========================================
+   SOFT BACKGROUND BLOBS
+========================================= */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    top: -180px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 138, 61, 0.08);
+
+    filter: blur(30px);
+
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    bottom: -100px;
+    left: 45%;
+
+    border-radius: 50%;
+
+    background:
+        rgba(232, 93, 4, 0.05);
+
+    filter: blur(25px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
 .hero-content {
+    position: relative;
+
+    z-index: 5;
+
     max-width: 650px;
 }
 
 .hero-label {
     display: inline-block;
+
     margin-bottom: 18px;
 
     color: #e85d04;
+
     font-size: 13px;
     font-weight: 700;
+
     letter-spacing: 2px;
 }
 
 .hero h1 {
     margin: 0;
+
     color: #202020;
-    font-size: clamp(48px, 6vw, 76px);
+
+    font-size:
+        clamp(48px, 5.7vw, 76px);
+
     line-height: 1.02;
-    letter-spacing: -3px;
+
+    letter-spacing: -3.5px;
 }
 
 .hero h1 span {
@@ -45,46 +124,699 @@
 
 .hero p {
     max-width: 520px;
+
     margin: 24px 0 32px;
 
     color: #666;
+
     font-size: 17px;
+
     line-height: 1.7;
 }
 
 .hero-button {
     display: inline-block;
+
     padding: 14px 24px;
+
     margin-top: 15px;
 
     border-radius: 13px;
+
     background: #e85d04;
+
     color: white;
 
     text-decoration: none;
+
     font-size: 15px;
     font-weight: 600;
 
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:
+        0 10px 24px
+        rgba(232, 93, 4, 0.13);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .hero-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(232, 93, 4, 0.25);
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 28px
+        rgba(232, 93, 4, 0.23);
 }
 
-@media (max-width: 600px) {
+
+/* =========================================
+   VISUAL AREA
+========================================= */
+
+.hero-visual {
+    position: relative;
+
+    min-height: 470px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 3;
+}
+
+
+/* =========================================
+   GLOW
+========================================= */
+
+.hero-visual-glow {
+    position: absolute;
+
+    width: 270px;
+    height: 270px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(232, 93, 4, 0.09);
+
+    filter: blur(55px);
+
+    animation:
+        heroGlow 5s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.9);
+
+        opacity: 0.55;
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.1);
+
+        opacity: 0.85;
+    }
+}
+
+
+/* =========================================
+   MAIN FOOD
+========================================= */
+
+.hero-food {
+    position: relative;
+
+    z-index: 5;
+
+    animation:
+        heroFoodFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFoodFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(2deg);
+    }
+}
+
+
+/* SHADOW */
+
+.hero-food-shadow {
+    position: absolute;
+
+    width: 175px;
+    height: 35px;
+
+    left: 50%;
+    bottom: -13px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(76, 42, 20, 0.13);
+
+    filter: blur(12px);
+
+    animation:
+        shadowPulse 5s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            scale(0.9);
+
+        opacity: 0.5;
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        opacity: 0.75;
+    }
+}
+
+
+/* PLATE */
+
+.hero-food-plate {
+    width: 225px;
+    height: 225px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff4ea
+        );
+
+    box-shadow:
+        0 25px 55px
+        rgba(70, 38, 18, 0.12),
+
+        inset 0 0 0 8px #ffffff,
+
+        inset 0 0 0 10px #f4e3d7;
+}
+
+
+/* INNER */
+
+.hero-food-inner {
+    width: 175px;
+    height: 175px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff8f2,
+            #fce4d1
+        );
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(232, 93, 4, 0.07);
+}
+
+
+/* FOOD */
+
+.hero-food-content {
+    font-size: 82px;
+
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 10px 10px
+            rgba(55, 28, 10, 0.15)
+        );
+
+    animation:
+        foodBreathe 4s ease-in-out infinite;
+}
+
+@keyframes foodBreathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+
+/* =========================================
+   FLOATING CARDS
+========================================= */
+
+.hero-float-card {
+    position: absolute;
+
+    z-index: 8;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 11px 14px;
+
+    border:
+        1px solid
+        rgba(0, 0, 0, 0.04);
+
+    border-radius: 15px;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        0 14px 30px
+        rgba(55, 30, 15, 0.08);
+
+    backdrop-filter:
+        blur(12px);
+}
+
+.hero-float-card > span {
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #fff0e6;
+
+    color: #e85d04;
+
+    font-size: 14px;
+}
+
+.hero-float-card strong {
+    display: block;
+
+    color: #303030;
+
+    font-size: 10px;
+}
+
+.hero-float-card small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #999;
+
+    font-size: 8px;
+}
+
+
+/* YUM */
+
+.hero-yum {
+    top: 85px;
+    left: 5px;
+
+    animation:
+        yumFloat 4s ease-in-out infinite;
+}
+
+@keyframes yumFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-8px)
+            rotate(1deg);
+    }
+}
+
+
+/* FRESH */
+
+.hero-fresh {
+    right: 5px;
+    bottom: 90px;
+
+    animation:
+        freshFloat 4.5s ease-in-out infinite;
+}
+
+@keyframes freshFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(2deg);
+    }
+
+    50% {
+        transform:
+            translateY(7px)
+            rotate(-1deg);
+    }
+}
+
+.hero-fresh-dot {
+    width: 9px !important;
+    height: 9px !important;
+
+    margin: 0 !important;
+
+    border-radius: 50% !important;
+
+    background: #55a630 !important;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(85, 166, 48, 0.1);
+}
+
+
+/* =========================================
+   SPARKLES
+========================================= */
+
+.hero-sparkle {
+    position: absolute;
+
+    z-index: 10;
+
+    color: #e85d04;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    animation:
+        sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle-one {
+    top: 65px;
+    right: 90px;
+
+    font-size: 27px;
+}
+
+.sparkle-two {
+    bottom: 100px;
+    left: 80px;
+
+    font-size: 17px;
+
+    animation-delay: 0.8s;
+}
+
+.sparkle-three {
+    top: 150px;
+    right: 30px;
+
+    font-size: 18px;
+
+    opacity: 0.5;
+
+    animation-delay: 1.4s;
+}
+
+@keyframes sparkleFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            scale(0.85);
+
+        opacity: 0.45;
+    }
+
+    50% {
+        transform:
+            translateY(-9px)
+            scale(1.12);
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   HEART
+========================================= */
+
+.hero-heart {
+    position: absolute;
+
+    right: 105px;
+    top: 195px;
+
+    z-index: 9;
+
+    color:
+        rgba(232, 93, 4, 0.55);
+
+    font-size: 19px;
+
+    animation:
+        heartBeat 2.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.15);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+
     .hero {
-        min-height: 450px;
-        padding: 60px 24px;
-        border-radius: 0 0 24px 24px;
+        grid-template-columns:
+            1fr 0.85fr;
+
+        padding:
+            65px 35px;
+    }
+
+    .hero-food-plate {
+        width: 195px;
+        height: 195px;
+    }
+
+    .hero-food-inner {
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-food-content {
+        font-size: 70px;
+    }
+
+    .hero-yum {
+        left: -5px;
+    }
+
+    .hero-fresh {
+        right: -5px;
+    }
+}
+
+
+@media (max-width: 760px) {
+
+    .hero {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        padding:
+            65px 24px 55px;
+
+        gap: 35px;
+
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 650px;
+
+        margin: 0 auto;
     }
 
     .hero h1 {
+        font-size:
+            clamp(46px, 11vw, 64px);
+
+        letter-spacing:
+            -2.5px;
+    }
+
+    .hero p {
+        margin:
+            20px auto 28px;
+
+        font-size: 15px;
+    }
+
+    .hero-visual {
+        min-height: 380px;
+
+        max-width: 430px;
+
+        width: 100%;
+
+        margin: 0 auto;
+    }
+
+    .hero-yum {
+        left: 5%;
+        top: 40px;
+    }
+
+    .hero-fresh {
+        right: 5%;
+        bottom: 40px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .hero {
+        padding:
+            55px 18px 40px;
+
+        gap: 25px;
+    }
+
+    .hero-label {
+        font-size: 10px;
+
+        letter-spacing: 1.5px;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+
         letter-spacing: -2px;
     }
 
     .hero p {
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    .hero-visual {
+        min-height: 340px;
+    }
+
+    .hero-food-plate {
+        width: 175px;
+        height: 175px;
+    }
+
+    .hero-food-inner {
+        width: 135px;
+        height: 135px;
+    }
+
+    .hero-food-content {
+        font-size: 60px;
+    }
+
+    .hero-float-card {
+        padding: 8px 10px;
+    }
+
+    .hero-float-card > span {
+        width: 26px;
+        height: 26px;
+    }
+
+    .hero-float-card strong {
+        font-size: 8px;
+    }
+
+    .hero-float-card small {
+        font-size: 7px;
+    }
+
+    .hero-yum {
+        left: 0;
+        top: 30px;
+    }
+
+    .hero-fresh {
+        right: 0;
+        bottom: 25px;
+    }
+
+    .hero-sparkle {
+        display: none;
+    }
+
+    .hero-heart {
+        right: 25px;
+        top: 105px;
     }
 }
