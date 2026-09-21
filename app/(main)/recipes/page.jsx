@@ -66,7 +66,7 @@ export default async function RecipesPage({ searchParams }) {
 
     return (
         <main className="recipes-page">
-
+ 
             <section className="recipes-hero">
 
                 <div className="recipes-hero-content">
