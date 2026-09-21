@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { getCategories, searchMeals } from "@/lib/api/meals";
 
 import RecipeGrid from "@/components/recipe-grid/RecipeGrid";
@@ -15,6 +17,84 @@ export default async function SearchPage({ searchParams }) {
         const data = await searchMeals(query);
 
         const meals = data.meals || [];
+
+        if (meals.length === 0) {
+            return (
+                <main className="search-page search-results-page">
+                    <section className="search-no-results">
+
+                        <div className="no-results-glow"></div>
+
+                        <div className="no-results-card">
+
+                            <div
+                                className="no-results-icon wow animate__animated animate__fadeInUp"
+                            >
+                                🍽️
+                            </div>
+
+                            <span
+                                className="no-results-label wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.1s"
+                            >
+                                SEARCH AGAIN
+                            </span>
+
+                            <h1
+                                className="wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.15s"
+                            >
+                                Nothing delicious
+                                <strong> found.</strong>
+                            </h1>
+
+                            <p
+                                className="wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.25s"
+                            >
+                                We couldn&apos;t find any recipes for{" "}
+                                <strong>&quot;{query}&quot;</strong>.
+                                <br />
+                                Try another recipe, ingredient or cuisine.
+                            </p>
+
+                            <div
+                                className="no-results-search wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.35s"
+                                style={{display: "flex", justifyContent: "center"}}
+                            >
+                                <SearchBar />
+                            </div>
+
+                            <div
+                                className="no-results-suggestions wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.45s"
+                            >
+                                <span>Try searching:</span>
+
+                                <Link href="/search?q=Chicken">
+                                    Chicken
+                                </Link>
+
+                                <Link href="/search?q=Pasta">
+                                    Pasta
+                                </Link>
+
+                                <Link href="/search?q=Dessert">
+                                    Dessert
+                                </Link>
+
+                                <Link href="/search?q=Pizza">
+                                    Pizza
+                                </Link>
+                            </div>
+
+                        </div>
+
+                    </section>
+                </main>
+            );
+        }
 
         return (
             <main className="search-page search-results-page">
@@ -44,41 +124,7 @@ export default async function SearchPage({ searchParams }) {
 
                 </section>
 
-                {meals.length > 0 ? (
-                    <RecipeGrid meals={meals} />
-                ) : (
-                    <section className="search-no-results">
-
-                        <div
-                            className="no-results-icon wow animate__animated animate__fadeInUp"
-                        >
-                            🍽️
-                        </div>
-
-                        <h2
-                            className="wow animate__animated animate__fadeInUp"
-                            data-wow-delay="0.15s"
-                        >
-                            Nothing delicious found.
-                        </h2>
-
-                        <p
-                            className="wow animate__animated animate__fadeInUp"
-                            data-wow-delay="0.3s"
-                        >
-                            Try searching for another
-                            recipe, ingredient or cuisine.
-                        </p>
-
-                        <div
-                            className="wow animate__animated animate__fadeInUp"
-                            data-wow-delay="0.45s"
-                        >
-                            <SearchBar />
-                        </div>
-
-                    </section>
-                )}
+                <RecipeGrid meals={meals} />
 
             </main>
         );

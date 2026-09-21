@@ -29,31 +29,21 @@ export default function Navbar() {
                 </Link>
 
                 <nav className="navbar-links">
-
-                    <Link
-                        href="/"
-                        className="wow animate__animated animate__fadeInDown"
-                        data-wow-delay="0.3s"
-                    >
+                    <Link href="/" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.3s">
                         Home
                     </Link>
 
-                    <Link
-                        href="/recipes"
-                        className="wow animate__animated animate__fadeInDown"
-                        data-wow-delay="0.4s"
-                    >
+                    <Link href="/recipes" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.4s">
                         Recipes
                     </Link>
 
-                    <Link
-                        href="/categories"
-                        className="wow animate__animated animate__fadeInDown"
-                        data-wow-delay="0.5s"
-                    >
+                    <Link href="/categories" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.5s">
                         Categories
                     </Link>
 
+                    <Link href="/favorites" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.6s">
+                        My Favorites
+                    </Link>
                 </nav>
 
                 <div className="navbar-actions">

@@ -1,4 +1,7 @@
 import Link from "next/link";
+
+import FavoriteButton from "@/components/favorite-button/FavoriteButton";
+
 import "./RecipeCard.css";
 
 export default function RecipeCard({ meal, category }) {
@@ -8,10 +11,16 @@ export default function RecipeCard({ meal, category }) {
             className="recipe-card"
         >
             <div className="recipe-card-image">
+
                 <img
                     src={meal.strMealThumb}
                     alt={meal.strMeal}
                 />
+
+                <FavoriteButton
+                    mealId={meal.idMeal}
+                />
+
             </div>
 
             <div className="recipe-card-content">
