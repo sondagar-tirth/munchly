@@ -2,6 +2,7 @@ import "./globals.css";
 import "animate.css";
 
 import WowInit from "@/components/wow-init/WowInit";
+import PageTitle from "@/components/page-title/PageTitle";
 
 export default function RootLayout({ children }) {
     return (
@@ -9,6 +10,7 @@ export default function RootLayout({ children }) {
             <body>
 
                 <WowInit />
+                <PageTitle />
 
                 {children}
 
