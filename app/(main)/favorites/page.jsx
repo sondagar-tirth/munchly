@@ -10,76 +10,158 @@ import FavoriteRecipeCard from "@/components/favorite-recipe-card/FavoriteRecipe
 import "./Favorites.css";
 
 const STORAGE_KEY = "munchlyFavorites";
+const ITEMS_PER_PAGE = 8;
 
 export default function FavoritesPage() {
 
     const [meals, setMeals] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
 
-        const loadFavorites = async () => {
+        const timer = setTimeout(() => {
 
-            try {
+            const loadFavorites = async () => {
 
-                const storedFavorites =
-                    JSON.parse(
-                        localStorage.getItem(STORAGE_KEY)
-                    ) || [];
+                try {
 
-                if (storedFavorites.length === 0) {
-                    setMeals([]);
-                    setIsLoading(false);
-                    return;
-                }
+                    const storedFavorites =
+                        JSON.parse(
+                            localStorage.getItem(STORAGE_KEY)
+                        ) || [];
 
-                const results =
-                    await Promise.all(
-                        storedFavorites.map(
-                            async (id) => {
-                                const data =
-                                    await getMealById(id);
+                    if (storedFavorites.length === 0) {
 
-                                return data.meals?.[0] || null;
-                            }
-                        )
+                        setMeals([]);
+                        setIsLoading(false);
+
+                        return;
+                    }
+
+                    const results =
+                        await Promise.all(
+                            storedFavorites.map(
+                                async (id) => {
+
+                                    const data =
+                                        await getMealById(id);
+
+                                    return (
+                                        data.meals?.[0] ||
+                                        null
+                                    );
+                                }
+                            )
+                        );
+
+                    setMeals(
+                        results.filter(Boolean)
                     );
 
-                setMeals(
-                    results.filter(Boolean)
-                );
+                } catch (error) {
 
-            } catch (error) {
+                    console.error(
+                        "Failed to load favorites:",
+                        error
+                    );
 
-                console.error(
-                    "Failed to load favorites:",
-                    error
-                );
+                    setMeals([]);
 
-            } finally {
+                } finally {
 
-                setIsLoading(false);
-            }
-        };
+                    setIsLoading(false);
+                }
+            };
 
-        loadFavorites();
+            loadFavorites();
+
+        }, 0);
+
+        return () => clearTimeout(timer);
 
     }, []);
 
-    function handleFavoriteChange(mealId, isFavorite) {
+
+    /* =========================================
+       REMOVE FAVORITE
+    ========================================= */
+
+    function handleFavoriteChange(
+        mealId,
+        isFavorite
+    ) {
 
         if (!isFavorite) {
 
-            setMeals((currentMeals) =>
-                currentMeals.filter(
+            const updatedMeals =
+                meals.filter(
                     (meal) =>
                         meal.idMeal !== mealId
-                )
-            );
+                );
+
+            setMeals(updatedMeals);
+
+            const updatedTotalPages =
+                Math.ceil(
+                    updatedMeals.length /
+                    ITEMS_PER_PAGE
+                );
+
+            if (updatedTotalPages === 0) {
+
+                setCurrentPage(1);
+
+            } else if (
+                currentPage > updatedTotalPages
+            ) {
+
+                setCurrentPage(
+                    updatedTotalPages
+                );
+            }
         }
     }
 
+
+    /* =========================================
+       PAGINATION
+    ========================================= */
+
+    const totalPages =
+        Math.ceil(
+            meals.length /
+            ITEMS_PER_PAGE
+        );
+
+    const startIndex =
+        (currentPage - 1) *
+        ITEMS_PER_PAGE;
+
+    const currentMeals =
+        meals.slice(
+            startIndex,
+            startIndex + ITEMS_PER_PAGE
+        );
+
+
+    function handlePageChange(page) {
+
+        setCurrentPage(page);
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+
+    /* =========================================
+       LOADING
+    ========================================= */
+
     if (isLoading) {
+
         return (
             <main className="favorites-page">
 
@@ -91,8 +173,13 @@ export default function FavoritesPage() {
         );
     }
 
+
     return (
         <main className="favorites-page">
+
+            {/* =========================================
+                HERO
+            ========================================= */}
 
             <section className="favorites-hero">
 
@@ -112,17 +199,27 @@ export default function FavoritesPage() {
                     </p>
 
                     <div className="favorites-count">
+
                         <span>♥</span>
+
                         {meals.length}{" "}
+
                         {meals.length === 1
                             ? "Recipe"
                             : "Recipes"}{" "}
+
                         Saved
+
                     </div>
 
                 </div>
 
             </section>
+
+
+            {/* =========================================
+                FAVORITES LIST
+            ========================================= */}
 
             {meals.length > 0 ? (
 
@@ -130,24 +227,108 @@ export default function FavoritesPage() {
 
                     <div className="favorites-list">
 
-                        {meals.map((meal) => (
+                        {currentMeals.map((meal) => (
+
                             <FavoriteRecipeCard
                                 key={meal.idMeal}
                                 meal={meal}
-                                onFavoriteChange={(isFavorite) =>
-                                    handleFavoriteChange(
-                                        meal.idMeal,
-                                        isFavorite
-                                    )
+                                onFavoriteChange={
+                                    (isFavorite) =>
+                                        handleFavoriteChange(
+                                            meal.idMeal,
+                                            isFavorite
+                                        )
                                 }
                             />
+
                         ))}
 
                     </div>
 
+
+                    {/* =========================================
+                        PAGINATION
+                    ========================================= */}
+
+                    {totalPages > 1 && (
+
+                        <div className="favorites-pagination">
+
+                            {/* PREVIOUS */}
+
+                            <button
+                                type="button"
+                                disabled={
+                                    currentPage === 1
+                                }
+                                onClick={() =>
+                                    handlePageChange(
+                                        currentPage - 1
+                                    )
+                                }
+                            >
+                                ←
+                            </button>
+
+
+                            {/* PAGE NUMBERS */}
+
+                            {Array.from(
+                                {
+                                    length: totalPages,
+                                },
+                                (_, index) =>
+                                    index + 1
+                            ).map((page) => (
+
+                                <button
+                                    key={page}
+                                    type="button"
+                                    className={
+                                        currentPage === page
+                                            ? "active"
+                                            : ""
+                                    }
+                                    onClick={() =>
+                                        handlePageChange(
+                                            page
+                                        )
+                                    }
+                                >
+                                    {page}
+                                </button>
+
+                            ))}
+
+
+                            {/* NEXT */}
+
+                            <button
+                                type="button"
+                                disabled={
+                                    currentPage ===
+                                    totalPages
+                                }
+                                onClick={() =>
+                                    handlePageChange(
+                                        currentPage + 1
+                                    )
+                                }
+                            >
+                                →
+                            </button>
+
+                        </div>
+
+                    )}
+
                 </section>
 
             ) : (
+
+                /* =========================================
+                   EMPTY STATE
+                ========================================= */
 
                 <section className="favorites-empty">
 

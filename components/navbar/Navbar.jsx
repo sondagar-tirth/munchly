@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import "./Navbar.css";
 
 export default function Navbar() {
 
     const router = useRouter();
+    const pathname = usePathname()
 
     function handleLogout() {
         localStorage.removeItem("isLoggedIn");
@@ -29,21 +30,43 @@ export default function Navbar() {
                 </Link>
 
                 <nav className="navbar-links">
-                    <Link href="/" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.3s">
+
+                    <Link
+                        href="/"
+                        className={`wow animate__animated animate__fadeInDown ${pathname === "/" ? "active" : ""
+                            }`}
+                        data-wow-delay="0.3s"
+                    >
                         Home
                     </Link>
 
-                    <Link href="/recipes" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.4s">
+                    <Link
+                        href="/recipes"
+                        className={`wow animate__animated animate__fadeInDown ${pathname.startsWith("/recipes") ? "active" : ""
+                            }`}
+                        data-wow-delay="0.4s"
+                    >
                         Recipes
                     </Link>
 
-                    <Link href="/categories" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.5s">
+                    <Link
+                        href="/categories"
+                        className={`wow animate__animated animate__fadeInDown ${pathname === "/categories" ? "active" : ""
+                            }`}
+                        data-wow-delay="0.5s"
+                    >
                         Categories
                     </Link>
 
-                    <Link href="/favorites" className="wow animate__animated animate__fadeInDown" data-wow-delay="0.6s">
+                    <Link
+                        href="/favorites"
+                        className={`wow animate__animated animate__fadeInDown ${pathname === "/favorites" ? "active" : ""
+                            }`}
+                        data-wow-delay="0.6s"
+                    >
                         My Favorites
                     </Link>
+
                 </nav>
 
                 <div className="navbar-actions">

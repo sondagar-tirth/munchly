@@ -86,6 +86,38 @@
         transform 0.2s ease;
 }
 
+.navbar-links a {
+    position: relative;
+}
+
+.navbar-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: #e85d04;
+
+    transform: translateX(-50%);
+
+    transition: width 0.25s ease;
+}
+
+.navbar-links a.active {
+    color: #e85d04;
+}
+
+.navbar-links a.active::after {
+    width: 22px;
+}
+
 .navbar-logout:hover {
     background: #ee1313;
     color: #ffffff;
